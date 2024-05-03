@@ -2,7 +2,7 @@
 
 namespace Services
 {
-    public interface IsVProduct
+    public interface ISvProduct
     {
         public Product AddProduct(Product product);
     }
