@@ -9,9 +9,9 @@ namespace Entities
     public class Category
     {
 
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public List<Product> Products { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public List<Product> products { get; set; }
 
     }
 }
