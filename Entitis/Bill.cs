@@ -11,7 +11,6 @@ namespace Entities
         public int id {  get; set; }
         public int userId { get; set; }
         public string date { get; set; }
-        public double total { get; set; }
         public string paymentMethod { get; set; }
     }
 }
