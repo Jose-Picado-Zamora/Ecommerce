@@ -10,12 +10,12 @@ namespace Entities
     public class Laptop : Product
     {
         public string processor {  get; set; }
-        public char RAM { get; set; }
-        public string OS { get; set; }
+        public string ram { get; set; } 
+        public string os { get; set; }
         public string screen { get; set; }
-        public char HDD { get; set; }
-        public char graphic_card { get; set; }
-        public char batterry { get; set; }
+        public string hdd { get; set; }
+        public string graphicCard { get; set; }
+        public string batterry { get; set; }
 
 
     }

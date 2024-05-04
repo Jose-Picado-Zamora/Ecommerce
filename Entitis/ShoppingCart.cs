@@ -10,5 +10,6 @@ namespace Entities
     {
         public int userId {  get; set; }
         public double total { get; set; }
-    }
+        public List<Detail> details { get; set; }
+}
 }

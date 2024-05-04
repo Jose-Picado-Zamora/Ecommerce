@@ -8,7 +8,6 @@ namespace Entities
 {
     public class Smarthphone : Product
     {
-        public string brand { get; set; }
         public string model { get; set; }
         public string camera { get; set; }
         public string memory { get; set; }
