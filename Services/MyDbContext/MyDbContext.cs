@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Services.MyDbContext
 {
-    internal class MyDbContext
+    public class MyDbContext
     {
     }
 }
