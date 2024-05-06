@@ -11,8 +11,4 @@
     <ProjectReference Include="..\Entitis\Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MyDbContext\" />
-  </ItemGroup>
-
 </Project>
