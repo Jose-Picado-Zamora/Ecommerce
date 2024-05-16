@@ -13,8 +13,8 @@ namespace Entities
         public string name { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public string addres { get; set; }
-        public ShoppingCart shoppingCart { get; set; }
+        public Address? address { get; set; }
+        public List<Bill> Bills { get; set; }
 
     }
 }
