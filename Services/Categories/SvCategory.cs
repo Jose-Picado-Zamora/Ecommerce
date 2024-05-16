@@ -12,7 +12,7 @@ namespace Services.Categories
             _myDbContext = new MyContext();
         }
 
-        public Product AddProductToCategory(Category category)
+        public Category AddProductToCategory(Category category)
         {
             _myDbContext.Categories.Add(category);
             _myDbContext.SaveChanges();
@@ -22,17 +22,23 @@ namespace Services.Categories
 
         public List<Category> GetAllCategories()
         {
-            throw new NotImplementedException();
+            return _myDbContext.Categories.Include(x => x.Products).ToList();
         }
 
         public Category GetCategoryById(int id)
         {
-            throw new NotImplementedException();
+            return _myDbContext.Categories.Include(x => x.Products).SingleOrDefault(x => x.id == id);
         }
 
-        public Product RemoveProductToCategory(int id)
+        public void RemoveProductToCategory(int id)
         {
-            throw new NotImplementedException();
+            Category deleteCategories = _myDbContext.Categories.Find(id);
+
+            if (deleteCategories is not null)
+            {
+                _myDbContext.Categories.Remove(deleteCategories);
+                _myDbContext.SaveChanges();
+            }
         }
     }
 }

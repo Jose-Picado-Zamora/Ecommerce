@@ -9,7 +9,7 @@ namespace Services
         public Category GetCategoryById(int id);
 
         //Writes
-        public Product AddProductToCategory(Category category);
-        public Product RemoveProductToCategory(int id);
+        public Category AddProductToCategory(Category category);
+        public void RemoveProductToCategory(int id);
     }
 }
