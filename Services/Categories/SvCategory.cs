@@ -11,15 +11,7 @@ namespace Services.Categories
         {
             _myDbContext = new MyContext();
         }
-
-        public Category AddProductToCategory(Category category)
-        {
-            _myDbContext.Categories.Add(category);
-            _myDbContext.SaveChanges();
-
-            return category;
-        }
-
+        #region READS 
         public List<Category> GetAllCategories()
         {
             return _myDbContext.Categories.Include(x => x.Products).ToList();
@@ -29,7 +21,9 @@ namespace Services.Categories
         {
             return _myDbContext.Categories.Include(x => x.Products).SingleOrDefault(x => x.id == id);
         }
+        #endregion
 
+        #region WRITES
         public void RemoveProductToCategory(int id)
         {
             Category deleteCategories = _myDbContext.Categories.Find(id);
@@ -40,5 +34,14 @@ namespace Services.Categories
                 _myDbContext.SaveChanges();
             }
         }
+
+        public Category AddProductToCategory(Category category)
+        {
+            _myDbContext.Categories.Add(category);
+            _myDbContext.SaveChanges();
+
+            return category;
+        }
+        #endregion
     }
 }
