@@ -4,9 +4,12 @@ namespace Services
 {
     public interface IsVCategory
     {
-        public Product AddProductToCategory(Product product);
-        public Product RemoveProductToCategory(int id);
+        //READS
         List<Category> GetAllCategories();
         public Category GetCategoryById(int id);
+
+        //Writes
+        public Category AddProductToCategory(Category category);
+        public void RemoveProductToCategory(int id);
     }
 }
