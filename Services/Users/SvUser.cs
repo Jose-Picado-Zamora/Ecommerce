@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities;
+using Microsoft.EntityFrameworkCore;
 using Services.MyDbContext;
 
 namespace Services.Users
@@ -11,34 +12,61 @@ namespace Services.Users
     public class SvUser : IsVUser
     {
         private MyContext _myDbContext = default!;
-        public SvAuthor()
+        public SvUser()
         {
             _myDbContext = new MyContext();
         }
-
-        User IsVUser.AddUser(User user)
+        #region Reads
+        public List<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _myDbContext.Users.Include(x => x.Bills).ToList();
         }
 
-        List<User> IsVUser.GetAllUsers()
+        public User GetUserById(int id)
+        {       //_myDbContext.Users.Find(id)
+            return _myDbContext.Users.Include(x => x.Bills).SingleOrDefault(x => x.id == id);
+        }
+        #endregion
+
+        #region Writes
+        public User AddUser(User user)
         {
-            throw new NotImplementedException();
+
+            _myDbContext.Users.Add(user);
+            _myDbContext.SaveChanges();
+
+            return user;
+        }
+        public void RemoveUser(int id)
+        {
+            User deleteUser = _myDbContext.Users.Find(id);
+
+            if (deleteUser is not null)
+            {
+                _myDbContext.Users.Remove(deleteUser);
+                _myDbContext.SaveChanges();
+            }
+        }
+        public User UpdateUser(int id, User newUser)
+        {
+            User updateUser = _myDbContext.Users.Find(id);
+
+            if (updateUser is not null)
+            {
+                updateUser.name = newUser.name;
+                updateUser.email = newUser.email;
+                updateUser.password = newUser.password;
+                updateUser.userName = newUser.userName;
+                updateUser.address = newUser.address;
+
+                _myDbContext.Users.Update(updateUser);
+                _myDbContext.SaveChanges();
+            }
+
+            return updateUser;
+
         }
 
-        User IsVUser.GetUserById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        User IsVUser.RemoveUser(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        User IsVUser.UpdateUser(int id, User user)
-        {
-            throw new NotImplementedException();
-        }
+        #endregion
     }
 }
