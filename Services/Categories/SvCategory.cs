@@ -34,6 +34,16 @@ namespace Services.Categories
                 _myDbContext.SaveChanges();
             }
         }
+        public Category UpdateCategory(int id, Category category)
+        {
+            Category categoryUpdate = _myDbContext.Categories.Find(id);
+            categoryUpdate.name = category.name;
+
+            _myDbContext.Update(categoryUpdate);
+            _myDbContext.SaveChanges();
+
+            return category;
+        }
 
         public Category AddProductToCategory(Category category)
         {

@@ -10,6 +10,7 @@ namespace Services
 
         //Writes
         public Category AddProductToCategory(Category category);
+        public Category UpdateCategory(int id, Category category);
         public void RemoveProductToCategory(int id);
     }
 }
