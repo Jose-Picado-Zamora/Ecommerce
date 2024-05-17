@@ -29,7 +29,7 @@ namespace Services.Products
         #endregion
 
 
-        #region Writes
+        #region WRITES
         public Product AddProduct(Product product)
         {
             _myDbContext.Products.Add(product);
