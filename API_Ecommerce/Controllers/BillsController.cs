@@ -5,8 +5,12 @@ using Services.Bills;
 
 namespace API_Ecommerce.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
+
     public class BillsController : Controller
     {
+       
 
         private IsVBill _svBill;
         public BillsController(IsVBill svBill)
