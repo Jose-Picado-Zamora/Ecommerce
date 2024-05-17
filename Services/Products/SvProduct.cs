@@ -16,7 +16,7 @@ namespace Services.Products
         {
             _myDbContext = new MyContext();
         }
-
+        #region READS
         public List<Product> GetAllProduct()
         {
             return _myDbContext.Products.Include(x => x.Category).ToList();
@@ -26,7 +26,10 @@ namespace Services.Products
         {
             return _myDbContext.Products.Include(x => x.Category).SingleOrDefault(x => x.id == id);
         }
+        #endregion
 
+
+        #region WRITES
         public Product AddProduct(Product product)
         {
             _myDbContext.Products.Add(product);
@@ -62,8 +65,8 @@ namespace Services.Products
             }
         }
 
-       
-       
+        #endregion
+
     }
 }
    
