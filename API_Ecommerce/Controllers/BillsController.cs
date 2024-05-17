@@ -7,7 +7,6 @@ namespace API_Ecommerce.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
     public class BillsController : Controller
     {
        
