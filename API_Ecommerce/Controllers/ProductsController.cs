@@ -4,7 +4,7 @@ using Services.Categories;
 
 namespace API_Ecommerce.Controllers
 {
-    public class CategoriesController : Controller
+    public class ProductsController : Controller
     {
         public IActionResult Index()
         {
