@@ -56,7 +56,6 @@ namespace Services.Users
                 updateUser.name = newUser.name;
                 updateUser.email = newUser.email;
                 updateUser.password = newUser.password;
-                updateUser.userName = newUser.userName;
                 updateUser.address = newUser.address;
 
                 _myDbContext.Users.Update(updateUser);
