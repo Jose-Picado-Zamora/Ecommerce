@@ -24,7 +24,7 @@ namespace Services.Categories
         #endregion
 
         #region WRITES
-        public void RemoveProductToCategory(int id)
+        public void RemoveCategory(int id)
         {
             Category deleteCategories = _myDbContext.Categories.Find(id);
 
@@ -45,7 +45,7 @@ namespace Services.Categories
             return category;
         }
 
-        public Category AddProductToCategory(Category category)
+        public Category AddCategory(Category category)
         {
             _myDbContext.Categories.Add(category);
             _myDbContext.SaveChanges();

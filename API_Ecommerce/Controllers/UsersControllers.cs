@@ -1,33 +1,58 @@
+using Entities;
 using Microsoft.AspNetCore.Mvc;
+using Services;
+using Services.Users;
 
 namespace API_Ecommerce.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private IsVUser _svUser;
+        public UsersController(IsVUser svUser)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
+            _svUser = svUser;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        // GET: api/<UsersController>
+        [HttpGet]
+        public IEnumerable<User> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return _svUser.GetAllUsers();
+        }
+
+        // GET api/<UsersController>/5
+        [HttpGet("{id}")]
+        public User Get(int id)
+        {
+            return _svUser.GetUserById(id);
+        }
+
+        // POST api/<UsersController>
+        [HttpPost]
+        public void Post([FromBody] User user)
+        {
+            _svUser.AddUser(user);
+        }
+
+        // PUT api/<UsersController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] User user)
+        {
+            _svUser.UpdateUser(id, new User
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                name = user.name,
+                email = user.email,
+                password = user.password,
+            });
+        }
+
+        // DELETE api/<UsersController>/5
+        [HttpDelete("{id}")]
+        public void RemoveUser(int id)
+        {
+            _svUser.RemoveUser(id);
         }
     }
 }

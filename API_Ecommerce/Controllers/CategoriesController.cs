@@ -33,7 +33,7 @@ namespace API_Ecommerce.Controllers
         [HttpPost]
         public void Post([FromBody] Category category)
         {
-            _svCategory.AddProductToCategory(category);
+            _svCategory.AddCategory(category);
         }
 
         // PUT api/<BooksController>/5
@@ -48,9 +48,9 @@ namespace API_Ecommerce.Controllers
 
         // DELETE api/<BooksController>/5
         [HttpDelete("{id}")]
-        public void RomoveProductToCategory(int id)
+        public void RemoveProductToCategory(int id)
         {
-            _svCategory.RemoveProductToCategory(id);
+            _svCategory.RemoveCategory(id);
         }
     }
 }
