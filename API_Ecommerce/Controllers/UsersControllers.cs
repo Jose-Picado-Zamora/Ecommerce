@@ -28,7 +28,7 @@ namespace API_Ecommerce.Controllers
         {
             return _svUser.GetUserById(id);
         }
-
+        
         // POST api/<UsersController>
         [HttpPost]
         public void Post([FromBody] User user)
@@ -36,23 +36,5 @@ namespace API_Ecommerce.Controllers
             _svUser.AddUser(user);
         }
 
-        // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] User user)
-        {
-            _svUser.UpdateUser(id, new User
-            {
-                name = user.name,
-                email = user.email,
-                password = user.password,
-            });
-        }
-
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void RemoveUser(int id)
-        {
-            _svUser.RemoveUser(id);
-        }
     }
 }

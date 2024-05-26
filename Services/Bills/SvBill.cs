@@ -39,39 +39,18 @@ namespace Services.Bills
 
             return bill;
         }
+        #endregion
 
-        public void RemoveBill(int id)
+        #region functional
+        public string SendEmail(int id)
         {
-            Bill deletBill = _myDbContext.Bills.Find(id);
-
-            if (deletBill is not null)
+            Bill billToSend = GetBillById(id);
+            if(billToSend is not null)
             {
-                _myDbContext.Bills.Remove(deletBill);
-                _myDbContext.SaveChanges();
+                return "Sending bill " + billToSend.id + " by emalil";
             }
+            return "Bill id " + billToSend.id + "haven't been found. Please check and try again";
         }
-
-        public bool SendEmail()
-        {
-            return true;
-        }
-
-        public Bill UpdateBill(int id, Bill bill)
-        {
-            Bill billUpdate = _myDbContext.Bills.Find(id);
-            billUpdate.UserId = bill.UserId;
-            billUpdate.datetime = bill.datetime;
-            billUpdate.paymentMethod = bill.paymentMethod;
-
-            _myDbContext.Update(billUpdate);
-            _myDbContext.SaveChanges();
-
-            return bill;
-
-
-        }
-
-
         #endregion
     }
 }
