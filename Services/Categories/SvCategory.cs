@@ -24,27 +24,6 @@ namespace Services.Categories
         #endregion
 
         #region WRITES
-        public void RemoveCategory(int id)
-        {
-            Category deleteCategories = _myDbContext.Categories.Find(id);
-
-            if (deleteCategories is not null)
-            {
-                _myDbContext.Categories.Remove(deleteCategories);
-                _myDbContext.SaveChanges();
-            }
-        }
-        public Category UpdateCategory(int id, Category category)
-        {
-            Category categoryUpdate = _myDbContext.Categories.Find(id);
-            categoryUpdate.name = category.name;
-
-            _myDbContext.Update(categoryUpdate);
-            _myDbContext.SaveChanges();
-
-            return category;
-        }
-
         public Category AddCategory(Category category)
         {
             _myDbContext.Categories.Add(category);

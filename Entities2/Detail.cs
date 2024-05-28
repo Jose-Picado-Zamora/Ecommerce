@@ -8,10 +8,10 @@ namespace Entities
 {
     public class Detail
     {
-        public int productId { get; set; }
         public int quantity { get; set; }
         public int subtotal { get; set; }
-        public Product product { get; set; }
+        public int ProductId { get; set; }
+        public Product? Product { get; set; }
 
     }
 }
