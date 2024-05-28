@@ -19,6 +19,7 @@ namespace Services.MyDbContext
         public DbSet<Product> Products { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Detail> Details { get; set; }
 
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +31,19 @@ namespace Services.MyDbContext
             modelBuilder.Entity<Bill>()
                 .HasOne(bill => bill.User)
                 .WithMany(user => user.Bills);
+
+            modelBuilder.Entity<Bill>()
+                .HasMany(bill => bill.Details)
+                .WithOne(details => details.Bill)
+                .HasForeignKey(bill => bill.BillId);
+
+            modelBuilder.Entity<Detail>()
+                .HasOne(detail => detail.Product);
+
+            modelBuilder.Entity<Detail>()
+                .HasOne(bill => bill.Bill)
+                .WithMany(details => details.Details);
+             
         }
     }
 }
