@@ -37,35 +37,6 @@ namespace Services.Users
 
             return user;
         }
-        public void RemoveUser(int id)
-        {
-            User deleteUser = _myDbContext.Users.Find(id);
-
-            if (deleteUser is not null)
-            {
-                _myDbContext.Users.Remove(deleteUser);
-                _myDbContext.SaveChanges();
-            }
-        }
-        public User UpdateUser(int id, User newUser)
-        {
-            User updateUser = _myDbContext.Users.Find(id);
-
-            if (updateUser is not null)
-            {
-                updateUser.name = newUser.name;
-                updateUser.email = newUser.email;
-                updateUser.password = newUser.password;
-                updateUser.address = newUser.address;
-
-                _myDbContext.Users.Update(updateUser);
-                _myDbContext.SaveChanges();
-            }
-
-            return updateUser;
-
-        }
-
         #endregion
     }
 }

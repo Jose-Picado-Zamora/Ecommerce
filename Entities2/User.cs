@@ -12,7 +12,7 @@ namespace Entities
         public string name { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public Address? address { get; set; }
+        public string address { get; set; }
         public List<Bill>? Bills { get; set; }
 
     }
