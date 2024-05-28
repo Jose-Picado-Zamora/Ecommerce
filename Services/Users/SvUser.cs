@@ -19,12 +19,13 @@ namespace Services.Users
         #region Reads
         public List<User> GetAllUsers()
         {
-            return _myDbContext.Users.Include(x => x.Bills).ToList();
+            //_myDbContext.Users.Include(x => x.Bills).ToList();
+            return _myDbContext.Users.ToList();
         }
 
         public User GetUserById(int id)
         {       //_myDbContext.Users.Find(id)
-            return _myDbContext.Users.Include(x => x.Bills).SingleOrDefault(x => x.id == id);
+            return _myDbContext.Users.SingleOrDefault(x => x.id == id);
         }
         #endregion
 

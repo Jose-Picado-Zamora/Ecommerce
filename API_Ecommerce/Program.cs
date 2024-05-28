@@ -15,12 +15,6 @@ builder.Services.AddScoped<ISvProduct, SvProduct>();
 builder.Services.AddScoped<IsVCategory, SvCategory>();
 builder.Services.AddScoped<IsVUser, SvUser>();
 
-/*
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<Detail>()
-        .HasNoKey();
-}*/
 
 //Manejo de ciclo infinito
 builder.Services.AddControllers()
