@@ -14,7 +14,6 @@ namespace Entities
         public string paymentMethod { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
-        [NotMapped] 
         public List<Detail>? Details { get; set; }
     }
 }

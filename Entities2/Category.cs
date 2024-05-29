@@ -11,7 +11,6 @@ namespace Entities
     {
         public int id { get; set; }
         public string name { get; set; }
-        [NotMapped]
         public List<Product>? Products { get; set; }
 
     }
