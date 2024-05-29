@@ -14,7 +14,6 @@ namespace Entities
         public string password { get; set; }
         public string email { get; set; }
         public string address { get; set; }
-        [NotMapped]
         public List<Bill>? Bills { get; set; }
 
     }

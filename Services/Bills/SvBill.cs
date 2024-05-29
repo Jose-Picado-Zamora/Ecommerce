@@ -22,7 +22,7 @@ namespace Services.Bills
 
         public List<Bill> GetAllBill()
         {
-            return _myDbContext.Bills.Include(x=>x.Details).ToList();
+            return _myDbContext.Bills.Include(x=>x.Details).Include(x => x.User).ToList();
         }
 
         public Bill GetBillById(int id)
@@ -35,6 +35,10 @@ namespace Services.Bills
         public Bill AddBill(Bill bill)
         {
             _myDbContext.Bills.Add(bill);
+            foreach (var det  in bill.Details)
+            {
+               // det.CalcularSubTotal();
+            }
             _myDbContext.SaveChanges();
 
             return bill;
