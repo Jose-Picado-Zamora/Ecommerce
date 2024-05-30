@@ -5,6 +5,11 @@ using Services.Categories;
 
 namespace API_Ecommerce.Controllers
 {
+    public class AddCategoryRequest
+    {
+        public string name { get; set; }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -28,8 +33,10 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] Category category)
+        public void Post([FromBody] AddCategoryRequest categoryRequest)
         {
+            Category category = new Category();
+            category.name = categoryRequest.name;
             _svCategory.AddCategory(category);
         }
 

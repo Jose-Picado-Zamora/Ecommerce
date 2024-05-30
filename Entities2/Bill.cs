@@ -12,6 +12,7 @@ namespace Entities
         public int id {  get; set; }
         public string datetime { get; set; }
         public string paymentMethod { get; set; }
+        public double? total { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
         public List<Detail>? Details { get; set; }
