@@ -49,8 +49,8 @@ namespace Services.Bills
         {
             Bill bill = GetBillById(id);
             if (bill != null && bill.total == 0 && bill.Details != null)
-            { // Ensure bill and details are not null
-                bill.total = 0; // Initialize total
+            { 
+                bill.total = 0; 
                 foreach (Detail detail in bill.Details)
                 {
                     detail.subtotal = detail.quantity * detail.Product.price;
