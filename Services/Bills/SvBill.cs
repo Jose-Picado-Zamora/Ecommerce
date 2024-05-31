@@ -27,18 +27,17 @@ namespace Services.Bills
 
         public Bill GetBillById(int id)
         {
-            return _myDbContext.Bills.Include(x => x.Details).ThenInclude(d => d.Product).SingleOrDefault(x => x.id == id);
+            return _myDbContext.Bills.Include(x => x.Details)
+                                     .ThenInclude(d => d.Product)
+                                     .Include(x => x.User).SingleOrDefault(x => x.id == id);
         }
         #endregion
 
         #region writes
         public Bill AddBill(Bill bill)
-        {
-            
+        { 
             _myDbContext.Bills.Add(bill);
-            
             _myDbContext.SaveChanges();
-
             return bill;
         }
         public bool SendEmail()
@@ -49,14 +48,16 @@ namespace Services.Bills
         public void CalculateTotals(int id)
         {
             Bill bill = GetBillById(id);
-            if(bill != null && bill.total == 0) {
+            if (bill != null && bill.total == 0 && bill.Details != null)
+            { // Ensure bill and details are not null
+                bill.total = 0; // Initialize total
                 foreach (Detail detail in bill.Details)
                 {
                     detail.subtotal = detail.quantity * detail.Product.price;
                     bill.total += detail.subtotal;
-                } 
+                }
+                UpdateBill(id, bill);
             }
-            UpdateBill(id,bill);
 
         }
 
