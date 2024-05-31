@@ -19,7 +19,7 @@ namespace Services.Products
         #region READS
         public List<Product> GetAllProduct()
         {
-            return _myDbContext.Products.Include(x => x.Category).ToList();
+            return _myDbContext.Products.ToList();
         }
 
         public Product GetProductById(int id)

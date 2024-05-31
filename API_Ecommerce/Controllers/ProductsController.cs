@@ -5,6 +5,31 @@ using Services.Products;
 
 namespace API_Ecommerce.Controllers
 {
+    /// <summary>
+    /// Represents the response body for retrieving a product.
+    /// </summary>
+    public class ProductResponse
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public double price { get; set; }
+        public string description { get; set; }
+        public string brand { get; set; }
+        public int inStock { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+    }
+
+    public class AddProductRequest
+    {
+        public string name { get; set; }
+        public double price { get; set; }
+        public string description { get; set; }
+        public string brand { get; set; }
+        public int inStock { get; set; }
+        public int CategoryId { get; set; }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : Controller
@@ -24,15 +49,42 @@ namespace API_Ecommerce.Controllers
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public Product Get(int id)
+        public ProductResponse Get(int id)
         {
-            return _svProduct.GetProductById(id);
+            Product product = _svProduct.GetProductById(id);
+
+
+            // Map the product to the response DTO
+            ProductResponse response = new ProductResponse
+            {
+                name = product.name,
+                price = product.price,
+                description = product.description,
+                inStock = product.inStock,
+                CategoryId = product.CategoryId,
+                brand = product.brand,
+                CategoryName = product.Category.name
+
+            };
+
+            return response;
+            
         }
 
         // POST api/<ProductsController>
         [HttpPost]
-        public void Post([FromBody] Product product)
+        public void Post([FromBody] AddProductRequest productRequest)
         {
+            Product product = new Product()
+            {
+                name = productRequest.name,
+                price = productRequest.price,
+                brand = productRequest.brand,
+                description = productRequest.description,
+                inStock = productRequest.inStock,
+                CategoryId = productRequest.CategoryId
+            };
+            
             _svProduct.AddProduct(product);
         }
 

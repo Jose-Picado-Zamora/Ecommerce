@@ -5,6 +5,14 @@ using Services.Users;
 
 namespace API_Ecommerce.Controllers
 {
+    public class AddUserRequest 
+    {
+        public string name { get; set; }
+        public string password { get; set; }
+        public string email { get; set; }
+        public string address { get; set; }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -28,8 +36,15 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] User user)
+        public void Post([FromBody] AddUserRequest userRequest)
         {
+            User user = new User()
+            {
+                name = userRequest.name,
+                password = userRequest.password,
+                email = userRequest.email,
+                address = userRequest.address,
+            };
             _svUser.AddUser(user);
         }
     }

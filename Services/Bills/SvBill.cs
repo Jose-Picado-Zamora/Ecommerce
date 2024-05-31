@@ -18,34 +18,56 @@ namespace Services.Bills
         }
 
         #region reads
-
-
         public List<Bill> GetAllBill()
-        {
-            return _myDbContext.Bills.Include(x=>x.Details).Include(x => x.User).ToList();
+        {           
+            return _myDbContext.Bills.Include(x => x.Details)
+                                     .ThenInclude(d => d.Product)
+                                     .Include(x => x.User).ToList(); 
         }
 
         public Bill GetBillById(int id)
         {
-            return _myDbContext.Bills.Include(x => x.Details).SingleOrDefault(x => x.id == id);
+            return _myDbContext.Bills.Include(x => x.Details)
+                                     .ThenInclude(d => d.Product)
+                                     .Include(x => x.User).SingleOrDefault(x => x.id == id);
         }
         #endregion
 
         #region writes
         public Bill AddBill(Bill bill)
-        {
+        { 
             _myDbContext.Bills.Add(bill);
-            foreach (var det  in bill.Details)
-            {
-               // det.CalcularSubTotal();
-            }
             _myDbContext.SaveChanges();
-
             return bill;
         }
         public bool SendEmail()
         {
             return true;
+        }
+
+        public void CalculateTotals(int id)
+        {
+            Bill bill = GetBillById(id);
+            if (bill != null && bill.total == 0 && bill.Details != null)
+            { 
+                bill.total = 0; 
+                foreach (Detail detail in bill.Details)
+                {
+                    detail.subtotal = detail.quantity * detail.Product.price;
+                    bill.total += detail.subtotal;
+                }
+                UpdateBill(id, bill);
+            }
+
+        }
+
+        public void UpdateBill(int id, Bill bill)
+        {
+            Bill billUpdate = _myDbContext.Bills.Find(id);
+            billUpdate.total = bill.total;
+            billUpdate.Details = bill.Details;
+            _myDbContext.Update(billUpdate);
+            _myDbContext.SaveChanges();
         }
 
         #endregion

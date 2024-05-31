@@ -5,6 +5,7 @@ using Services.Bills;
 
 namespace API_Ecommerce.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class BillsController : Controller
@@ -32,6 +33,12 @@ namespace API_Ecommerce.Controllers
         public void Post([FromBody] Bill bill)
         {
             _svBill.AddBill(bill);
-        }  
+        }
+
+        [HttpPost("{id}")]
+        public void Confirmation(int id)
+        {
+            _svBill.CalculateTotals(id);
+        }
     }
 }
