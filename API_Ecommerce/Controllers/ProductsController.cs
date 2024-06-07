@@ -8,28 +8,9 @@ namespace API_Ecommerce.Controllers
     /// <summary>
     /// Represents the response body for retrieving a product.
     /// </summary>
-    public class ProductResponse
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public double price { get; set; }
-        public string description { get; set; }
-        public string brand { get; set; }
-        public int inStock { get; set; }
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-    }
+   
 
-    public class AddProductRequest
-    {
-        public string name { get; set; }
-        public double price { get; set; }
-        public string description { get; set; }
-        public string brand { get; set; }
-        public int inStock { get; set; }
-        public int CategoryId { get; set; }
-    }
-
+  
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : Controller

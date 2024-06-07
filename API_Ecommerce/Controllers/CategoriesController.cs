@@ -5,10 +5,7 @@ using Services.Categories;
 
 namespace API_Ecommerce.Controllers
 {
-    public class AddCategoryRequest
-    {
-        public string name { get; set; }
-    }
+    
 
     [Route("api/[controller]")]
     [ApiController]

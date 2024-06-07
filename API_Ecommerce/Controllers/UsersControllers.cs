@@ -5,13 +5,7 @@ using Services.Users;
 
 namespace API_Ecommerce.Controllers
 {
-    public class AddUserRequest 
-    {
-        public string name { get; set; }
-        public string password { get; set; }
-        public string email { get; set; }
-        public string address { get; set; }
-    }
+    
 
     [Route("api/[controller]")]
     [ApiController]
