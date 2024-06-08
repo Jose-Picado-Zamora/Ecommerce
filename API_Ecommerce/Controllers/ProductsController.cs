@@ -38,6 +38,7 @@ namespace API_Ecommerce.Controllers
             // Map the product to the response DTO
             ProductResponse response = new ProductResponse
             {
+                id = product.id,
                 name = product.name,
                 price = product.price,
                 description = product.description,
