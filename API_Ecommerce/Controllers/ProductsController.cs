@@ -23,9 +23,28 @@ namespace API_Ecommerce.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<Product> Get()
+      
+        public IEnumerable<ProductResponse> Get()
         {
-            return _svProduct.GetAllProduct();
+            List<ProductResponse> productResponses = new List<ProductResponse>();
+
+            foreach (var product in _svProduct.GetAllProduct()) {
+
+                ProductResponse response = new ProductResponse
+                {
+                    id = product.id,
+                    name = product.name,
+                    price = product.price,
+                    description = product.description,
+                    brand = product.brand,
+                    inStock = product.inStock,
+                    CategoryId = product.CategoryId,
+                    CategoryName = product.Category.name
+
+                };
+                productResponses?.Add(response);
+            }
+            return productResponses;
         }
 
         // GET api/<ProductsController>/5
