@@ -9,6 +9,6 @@ namespace Services.Emails
 {
     public interface IEmailSender
     {
-        public void SendEmail();
+        public void SendEmail(Bill bill);
     }
 }
