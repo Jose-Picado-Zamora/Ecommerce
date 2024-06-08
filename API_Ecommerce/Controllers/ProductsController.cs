@@ -8,28 +8,9 @@ namespace API_Ecommerce.Controllers
     /// <summary>
     /// Represents the response body for retrieving a product.
     /// </summary>
-    public class ProductResponse
-    {
-        public int id { get; set; }
-        public string name { get; set; }
-        public double price { get; set; }
-        public string description { get; set; }
-        public string brand { get; set; }
-        public int inStock { get; set; }
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
-    }
+   
 
-    public class AddProductRequest
-    {
-        public string name { get; set; }
-        public double price { get; set; }
-        public string description { get; set; }
-        public string brand { get; set; }
-        public int inStock { get; set; }
-        public int CategoryId { get; set; }
-    }
-
+  
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : Controller
@@ -42,9 +23,28 @@ namespace API_Ecommerce.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<Product> Get()
+      
+        public IEnumerable<ProductResponse> Get()
         {
-            return _svProduct.GetAllProduct();
+            List<ProductResponse> productResponses = new List<ProductResponse>();
+
+            foreach (var product in _svProduct.GetAllProduct()) {
+
+                ProductResponse response = new ProductResponse
+                {
+                    id = product.id,
+                    name = product.name,
+                    price = product.price,
+                    description = product.description,
+                    brand = product.brand,
+                    inStock = product.inStock,
+                    CategoryId = product.CategoryId,
+                    CategoryName = product.Category.name
+
+                };
+                productResponses?.Add(response);
+            }
+            return productResponses;
         }
 
         // GET api/<ProductsController>/5
@@ -57,6 +57,7 @@ namespace API_Ecommerce.Controllers
             // Map the product to the response DTO
             ProductResponse response = new ProductResponse
             {
+                id = product.id,
                 name = product.name,
                 price = product.price,
                 description = product.description,
