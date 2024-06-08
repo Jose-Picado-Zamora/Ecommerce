@@ -40,10 +40,6 @@ namespace Services.Bills
             _myDbContext.SaveChanges();
             return bill;
         }
-        public bool SendEmail()
-        {
-            return true;
-        }
 
         public void CalculateTotals(int id)
         {
@@ -54,8 +50,8 @@ namespace Services.Bills
                 foreach (Detail detail in bill.Details)
                 {
                     detail.subtotal = detail.quantity * detail.Product.price;
-                    bill.total += detail.subtotal;
                 }
+                bill.total = bill.Details.Sum(x => x.subtotal);
                 UpdateBill(id, bill);
             }
 

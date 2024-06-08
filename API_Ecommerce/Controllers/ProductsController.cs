@@ -5,12 +5,7 @@ using Services.Products;
 
 namespace API_Ecommerce.Controllers
 {
-    /// <summary>
-    /// Represents the response body for retrieving a product.
-    /// </summary>
-   
 
-  
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : Controller
@@ -21,7 +16,6 @@ namespace API_Ecommerce.Controllers
             _svProduct = svProduct;
         }
 
-        // GET: api/<ProductsController>
         [HttpGet]
       
         public IEnumerable<ProductResponse> Get()
@@ -47,14 +41,11 @@ namespace API_Ecommerce.Controllers
             return productResponses;
         }
 
-        // GET api/<ProductsController>/5
         [HttpGet("{id}")]
         public ProductResponse Get(int id)
         {
             Product product = _svProduct.GetProductById(id);
 
-
-            // Map the product to the response DTO
             ProductResponse response = new ProductResponse
             {
                 id = product.id,
@@ -72,7 +63,6 @@ namespace API_Ecommerce.Controllers
             
         }
 
-        // POST api/<ProductsController>
         [HttpPost]
         public void Post([FromBody] AddProductRequest productRequest)
         {
@@ -89,7 +79,6 @@ namespace API_Ecommerce.Controllers
             _svProduct.AddProduct(product);
         }
 
-        // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Product product)
         {
@@ -104,7 +93,6 @@ namespace API_Ecommerce.Controllers
             });
         }
 
-        // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

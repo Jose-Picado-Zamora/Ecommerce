@@ -3,6 +3,7 @@ using Services.Bills;
 using Services.Products;
 using Services.Categories;
 using Services.Users;
+using Services.Emails;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,7 +13,7 @@ builder.Services.AddScoped<IsVBill, SvBill>();
 builder.Services.AddScoped<ISvProduct, SvProduct>();
 builder.Services.AddScoped<IsVCategory, SvCategory>();
 builder.Services.AddScoped<IsVUser, SvUser>();
-
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 //Manejo de ciclo infinito
 builder.Services.AddControllers()

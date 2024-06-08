@@ -10,7 +10,7 @@ namespace Entities
     public class Bill
     {
         public int id {  get; set; }
-        public string datetime { get; set; }
+        public string date { get; set; }
         public string paymentMethod { get; set; }
         public double? total { get; set; }
         public int UserId { get; set; }

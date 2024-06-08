@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.Bills;
+using Services.Emails;
 
 namespace API_Ecommerce.Controllers
 {
@@ -11,8 +12,10 @@ namespace API_Ecommerce.Controllers
     public class BillsController : Controller
     {
         private IsVBill _svBill;
-        public BillsController(IsVBill svBill)
+        private readonly IEmailSender _emailSender;
+        public BillsController(IsVBill svBill, IEmailSender emailSender)
         {
+            _emailSender = emailSender;
             _svBill = svBill;
         }
 
@@ -28,17 +31,14 @@ namespace API_Ecommerce.Controllers
             var result = _svBill.GetBillById(id);
             return _svBill.GetBillById(id);
         }
-      
+
         [HttpPost]
         public void Post([FromBody] Bill bill)
         {
             _svBill.AddBill(bill);
+            _svBill.CalculateTotals(bill.id);
+            _emailSender.SendEmail(bill);
         }
 
-        [HttpPost("{id}")]
-        public void Confirmation(int id)
-        {
-            _svBill.CalculateTotals(id);
-        }
     }
 }
