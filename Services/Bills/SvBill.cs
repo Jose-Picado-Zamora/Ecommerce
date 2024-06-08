@@ -20,16 +20,12 @@ namespace Services.Bills
         #region reads
         public List<Bill> GetAllBill()
         {           
-            return _myDbContext.Bills.Include(x => x.Details)
-                                     .ThenInclude(d => d.Product)
-                                     .Include(x => x.User).ToList(); 
+            return _myDbContext.Bills.Include(x => x.Details).ThenInclude(d => d.Product).Include(x => x.User).ToList(); 
         }
 
         public Bill GetBillById(int id)
         {
-            return _myDbContext.Bills.Include(x => x.Details)
-                                     .ThenInclude(d => d.Product)
-                                     .Include(x => x.User).SingleOrDefault(x => x.id == id);
+            return _myDbContext.Bills.Include(x => x.Details).ThenInclude(d => d.Product).Include(x => x.User).SingleOrDefault(x => x.id == id);
         }
         #endregion
 

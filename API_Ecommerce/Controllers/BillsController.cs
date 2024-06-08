@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services;
 using Services.Bills;
 using Services.Emails;
+using Services.Products;
 
 namespace API_Ecommerce.Controllers
 {
@@ -20,11 +21,35 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Bill> Get()
+        public IEnumerable<BillResponse> Get()
         {
-            return _svBill.GetAllBill();
+            List<BillResponse> billResponses = new List<BillResponse>();
+
+            foreach (var bill in _svBill.GetAllBill())
+            {
+                UserResponse userResponse = new UserResponse
+                {
+                    id = bill.User.id,
+                    name = bill.User.name,
+                    email = bill.User.email,
+                    address = bill.User.address,
+                };
+
+                BillResponse response = new BillResponse
+                {
+                    id = bill.id,
+                    date = bill.date,
+                    paymentMethod = bill.paymentMethod,
+                    total = bill.total,
+                    UserId = bill.UserId,
+                    Details = bill.Details,
+                    UserResponse = userResponse
+                };
+                billResponses?.Add(response);
+            }
+            return billResponses;
         }
-        
+
         [HttpGet("{id}")]
         public Bill Get(int id)
         {

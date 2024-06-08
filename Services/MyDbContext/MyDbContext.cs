@@ -12,7 +12,6 @@ namespace Services.MyDbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseInMemoryDatabase("MyDatabase");
         }
         public DbSet<User> Users { get; set; }
@@ -35,7 +34,6 @@ namespace Services.MyDbContext
             modelBuilder.Entity<Bill>()
                 .HasMany(bill => bill.Details)
                 .WithOne(details => details.Bill);
-            //.HasForeignKey(bill => bill.BillId);
 
             modelBuilder.Entity<Detail>()
                 .HasOne(detail => detail.Product);

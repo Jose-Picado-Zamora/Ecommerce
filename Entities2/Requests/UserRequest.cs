@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    public class AddUserRequest
+    public class UserRequest
     {
         public string name { get; set; }
         public string password { get; set; }

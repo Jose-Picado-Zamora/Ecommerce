@@ -64,7 +64,7 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] AddProductRequest productRequest)
+        public void Post([FromBody] ProductRequest productRequest)
         {
             Product product = new Product()
             {
@@ -80,7 +80,7 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Product product)
+        public void Put(int id, [FromBody] ProductRequest product)
         {
             _svProduct.UpdateProduct(id, new Product
             {

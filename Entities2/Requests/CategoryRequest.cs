@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    public class AddCategoryRequest
+    public class CategoryRequest
     {
         public string name { get; set; }
     }
