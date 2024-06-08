@@ -24,8 +24,8 @@ namespace API_Ecommerce.Controllers
         public IEnumerable<BillResponse> Get()
         {
             List<BillResponse> billResponses = new List<BillResponse>();
-
-            foreach (var bill in _svBill.GetAllBill())
+            List<Bill> bills = _svBill.GetAllBill();
+            foreach (var bill in bills)
             {
                 UserResponse userResponse = new UserResponse
                 {
@@ -42,14 +42,33 @@ namespace API_Ecommerce.Controllers
                     paymentMethod = bill.paymentMethod,
                     total = bill.total,
                     UserId = bill.UserId,
-                    Details = bill.Details,
-                    UserResponse = userResponse
+                    UserResponse = userResponse,
+                    Details = new List<DetailResponse>() 
                 };
-                billResponses?.Add(response);
+
+                foreach (var detail in bill.Details)
+                {
+                    DetailResponse newDetail = new DetailResponse
+                    {
+                        quantity = detail.quantity,
+                        subtotal = detail.subtotal,
+                        ProductId = detail.ProductId
+                    };
+
+                    newDetail.Product = new ProductResponseDetail
+                    {
+                        id = detail.Product.id,
+                        name = detail.Product.name,
+                        price = detail.Product.price,
+                    };
+
+                    response.Details?.Add(newDetail);
+                }
+
+                billResponses.Add(response);
             }
             return billResponses;
         }
-
         [HttpGet("{id}")]
         public Bill Get(int id)
         {
