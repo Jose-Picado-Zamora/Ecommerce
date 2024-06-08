@@ -10,7 +10,7 @@ namespace Entities
     {
         public int id { get; set; }
         public int quantity { get; set; }
-        public double? subtotal { get; set; }
+        public double? subtotal { get; set; } = 0;
         public int ProductId { get; set; }
         public Product? Product { get; set; }
         public int BillId { get; set; }

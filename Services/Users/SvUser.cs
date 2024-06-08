@@ -20,11 +20,11 @@ namespace Services.Users
         public List<User> GetAllUsers()
         {
             return _myDbContext.Users.Include(x => x.Bills).ToList();
-        }
 
+        }
         public User GetUserById(int id)
-        {       //_myDbContext.Users.Find(id)
-            return _myDbContext.Users.Include(x => x.Bills).SingleOrDefault(x => x.id == id);
+        {     
+            return _myDbContext.Users.Include(x => x.Bills).ThenInclude(X => X.Details).SingleOrDefault(x => x.id == id);
         }
         #endregion
 

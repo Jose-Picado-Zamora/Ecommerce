@@ -30,7 +30,7 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] AddUserRequest userRequest)
+        public void Post([FromBody] UserRequest userRequest)
         {
             User user = new User()
             {

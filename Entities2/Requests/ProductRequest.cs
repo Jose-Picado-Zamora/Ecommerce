@@ -2,7 +2,7 @@
 
 namespace Entities
 {
-    public class AddProductRequest
+    public class ProductRequest
     {
         public string name { get; set; }
         public double price { get; set; }

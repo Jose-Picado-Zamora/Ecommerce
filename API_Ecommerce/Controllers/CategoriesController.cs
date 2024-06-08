@@ -30,7 +30,7 @@ namespace API_Ecommerce.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] AddCategoryRequest categoryRequest)
+        public void Post([FromBody] CategoryRequest categoryRequest)
         {
             Category category = new Category();
             category.name = categoryRequest.name;
